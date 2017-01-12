@@ -31,6 +31,7 @@ def evalidate(input):
 	    return evil_input
         else:
             print('Input of type', type(evil_input), 'is not acceptable. Please enter something else.')
+            return None
 
 def prompt(promptstr):
     print(promptstr, end=": ")
@@ -55,7 +56,7 @@ def subtractionify(a, b):
 while True:
         a, b = get_inputs()
 
-        if a and b:
+        if a is not None and b is not None:
             if type(a) == type(b):
                 result = additionify(a, b)
                 print('Result:', result)
