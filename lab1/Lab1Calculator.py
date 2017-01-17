@@ -6,6 +6,12 @@ from __future__ import print_function
 from sys import stdin
 from ast import literal_eval
 
+def prompt(promptstr):
+    """
+    Print promptstr and read next line from stdin
+    """
+    print(promptstr, end=": ")
+    return stdin.readline().strip('\r\n')
 
 def interpret(input_string):
     """
@@ -35,13 +41,6 @@ def get_input(promptstr, valid_types=None, valid_values=None):
                 print('Input not one of', valid_values, '. Please enter one of these.')
         else:
             print('Input of type', type(value), 'is not one of', valid_types, '. Please enter one of these.')
-
-def prompt(promptstr):
-    """
-    Print promptstr and read next line from stdin
-    """
-    print(promptstr, end=": ")
-    return stdin.readline().strip('\r\n')
 
 def get_inputs():
     """
