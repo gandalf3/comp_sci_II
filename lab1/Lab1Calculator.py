@@ -8,6 +8,10 @@ from ast import literal_eval
 
 
 def interpret(input_string):
+    """
+    Return typed version of input string
+    """
+    
     # try to evaluate input to determine type, fall back to str if nothing works
     try:
         evil_input = literal_eval(input_string)
@@ -17,6 +21,10 @@ def interpret(input_string):
     return evil_input
 
 def get_input(promptstr, valid_types=None, valid_values=None):
+    """
+    Repeatedly prompt user with promptstr until a response c
+    """
+    
     while True:
         value = interpret(prompt(promptstr))
         
@@ -29,12 +37,15 @@ def get_input(promptstr, valid_types=None, valid_values=None):
             print('Input of type', type(value), 'is not one of', valid_types, '. Please enter one of these.')
 
 def prompt(promptstr):
+    """
+    Print promptstr and read next line from stdin
+    """
     print(promptstr, end=": ")
     return stdin.readline().strip('\r\n')
 
 def get_inputs():
     """
-    Prompt user and collect input
+    Collect all user values needed to perform calculation
     """
     
     op = get_input(
