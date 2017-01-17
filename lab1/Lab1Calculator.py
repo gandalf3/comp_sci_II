@@ -7,60 +7,62 @@ from sys import stdin
 from ast import literal_eval
 
 
-def evalidate(input):
-	"""
-	Evaluate input and return None if type of input is not acceptable; else return input with evaluated type
-	"""
-	valid_types = {
-		int,
-		float,
-		str,
-		tuple,
-		list,
-		bool
-	}
-		
-	
-        # try to evaluate input
-        try:
-	    evil_input = literal_eval(input)
-        except (ValueError, SyntaxError):
-            evil_input = str(input)
+def interpret(input_string):
+    # try to evaluate input to determine type, fall back to str if nothing works
+    try:
+        evil_input = literal_eval(input_string)
+    except (ValueError, SyntaxError):
+        evil_input = str(input_string)
+        
+    return evil_input
 
-	if type(evil_input) in valid_types:
-	    return evil_input
+def get_input(promptstr, valid_types=None, valid_values=None):
+    while True:
+        value = interpret(prompt(promptstr))
+        
+        if valid_types is None or type(value) in valid_types:
+            if valid_values is None or value in valid_values:
+                return value
+            else:
+                print('Input not one of', valid_values, '. Please enter one of these.')
         else:
-            print('Input of type', type(evil_input), 'is not acceptable. Please enter something else.')
-            return None
+            print('Input of type', type(value), 'is not one of', valid_types, '. Please enter one of these.')
 
 def prompt(promptstr):
     print(promptstr, end=": ")
     return stdin.readline().strip('\r\n')
 
 def get_inputs():
-	"""
-	Prompt user and collect input
-	"""
-	input_a = prompt('Enter a value')
-	input_b = prompt('Enter another value')
-	
-	return evalidate(input_a), evalidate(input_b)
+    """
+    Prompt user and collect input
+    """
+    
+    op = get_input(
+            "In the spirit of Reverse Polish Style..\nPlease specify an operation (a[dd]|s[ubtract])",
+            valid_types=[str],
+            valid_values=["a", "add", "s", "subtract"]
+        )
 
-def additionify(a, b):
-	return a + b
-
-
-def subtractionify(a, b):
-        pass
+    if op is not None:
+        inputs = []
+        for i, promptstr in enumerate(['Enter a value', 'Enter another value']):
+            # get an input of correct type depending on selected operation
+            inputs.append(
+                get_input(
+                    promptstr,
+                    valid_types=[int, float, str, tuple, list, bool] if op.startswith('a') else [int, float]
+                ))
+        
+    return op, inputs[0], inputs[1]
 
 while True:
-        a, b = get_inputs()
+        op, a, b = get_inputs()
 
-        if a is not None and b is not None:
-            if type(a) == type(b):
-                result = additionify(a, b)
-                print('Result:', result)
+        if type(a) == type(b):
+            if op.startswith('a'):
+                result = a + b
             else:
-                print('Types', type(a), 'and', type(b), 'are not the same. Please enter two values of the same type')
-
-
+                result = a - b
+            print('Result:', result)
+        else:
+            print('Types', type(a), 'and', type(b), 'are not the same. Please enter two values of the same type')
