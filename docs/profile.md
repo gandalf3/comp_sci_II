@@ -2,11 +2,9 @@
 title: Profile
 ---
 
-# Profile
-
 ## Projects
 
-[Lab 1: Type-aware calculator](https://github.com/gandalf3/comp_sci_II/lab1)
+[Lab 1: Type-aware calculator](https://github.com/gandalf3/comp_sci_II/lab1/tree/master/lab1)
 
 
 ## Github links
