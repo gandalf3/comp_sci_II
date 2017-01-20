@@ -22,16 +22,16 @@ Here are a set of test cases and their expected values, in the form of:
 
 ```
 a .5 .5
-1
+1.0
 
 s .5 .5
-0
+0.0
 
 s None None
 invalid
 
 a "4" "2"
-"42"
+42
 
 # dicts are not considered valid by the spec
 a {4} {2}
@@ -43,7 +43,8 @@ a [4] [2]
 a (4, 2) (4, 2)
 (4, 2, 4, 2)
 
-s [4] [2]
+# should reprompt immediately, without waiting for user to waste more input
+s [4]
 invalid
 
 a True False
@@ -56,5 +57,14 @@ a True True
 True
 
 s True False
+invalid
+
+a None
+invalid
+
+s .5 1
+invalid
+
+a "8" 8
 invalid
 ```
