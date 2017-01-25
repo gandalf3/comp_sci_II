@@ -48,7 +48,7 @@ def get_inputs():
     """
     
     op = get_input(
-            "In the spirit of Reverse Polish Style..\nPlease specify an operation (a[dd]|s[ubtract])",
+            "In the spirit of Reverse Reverse Polish Style..\nPlease specify an operation (a[dd]|s[ubtract])",
             valid_types=[str],
             valid_values=["a", "add", "s", "subtract"]
         )
