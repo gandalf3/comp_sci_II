@@ -73,6 +73,8 @@ while True:
                 result = a + b
             else:
                 result = a - b
+            if type(a) is bool:
+                result = a and b
             print('Result:', result)
         else:
             print('Types', type(a), 'and', type(b), 'are not the same. Please enter two values of the same type')
