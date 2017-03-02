@@ -10,6 +10,7 @@ title: Profile
 
 [Lab 3: Guess the Number in Java](https://github.com/gandalf3/comp_sci_II-lab3)
 
+[Lab 4: Guess the Number in Java (GUI Edition!) (Now with 100% more Buttons!)](https://github.com/gandalf3/comp_sci_II-lab4)
 
 ## Github links
 [account](https://github.com/gandalf3)
